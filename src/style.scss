@@ -1,0 +1,27 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+
+
+.wp-block-image-selector-example-image-selector {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.wp-block-image-selector-example-image {
+	.components-spinner {
+			margin: 0;
+			float: none;
+	}
+
+	// Space consecutive buttons evenly.
+	.components-button + .components-button {
+			margin-top: 1em;
+			margin-right: 8px;
+	}
+}
