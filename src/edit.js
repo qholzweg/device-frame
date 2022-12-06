@@ -1,4 +1,4 @@
-import { PanelBody, Button, ResponsiveWrapper, Spinner } from '@wordpress/components';
+import { PanelBody, Button, ResponsiveWrapper, Spinner, SelectControl } from '@wordpress/components';
 import { Component, Fragment } from '@wordpress/element';
 import { InspectorControls, InnerBlocks, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { compose } from '@wordpress/compose';
@@ -9,23 +9,31 @@ const ALLOWED_MEDIA_TYPES = [ 'image' ];
 class ImageSelectorEdit extends Component {
 	render() {
 		const { attributes, setAttributes, bgImage, className } = this.props;
-		const { bgImageId } = attributes;
-		const instructions = <p>{ __( 'To edit the background image, you need permission to upload media.', 'image-selector-example' ) }</p>;
+		const { imageId, device } = attributes;
+		const instructions = <p>{ __( 'To edit the image, you need permission to upload media.', 'device-frame' ) }</p>;
 
-		let styles = {};
 		if ( bgImage && bgImage.source_url ) {
-			styles = { backgroundImage: `url(${ bgImage.source_url })` };
+			setAttributes( {
+				imageUrl: bgImage.source_url,
+			} );
 		}
 
 		const onUpdateImage = ( image ) => {
 			setAttributes( {
-				bgImageId: image.id,
+				imageId: image.id,
 			} );
 		};
 
 		const onRemoveImage = () => {
 			setAttributes( {
-				bgImageId: undefined,
+				imageId: undefined,
+				imageUrl: undefined,
+			} );
+		};
+
+		const setDevice = (device) => {
+			setAttributes( {
+				device: device,
 			} );
 		};
 
@@ -33,65 +41,80 @@ class ImageSelectorEdit extends Component {
 			<Fragment>
 				<InspectorControls>
 					<PanelBody
-						title={ __( 'Background settings', 'image-selector-example' ) }
+						title={ __( 'Device frame settings', 'device-frame' ) }
 						initialOpen={ true }
 					>
-						<div className="wp-block-image-selector-example-image">
+						<div className="wp-block-device-frame-settings">
+						<SelectControl
+								label="Select device type"
+								value={ device }
+								options={ [
+										{ label: 'Iphone', value: 'iphone' },
+										{ label: 'Ipad (vertical)', value: 'ipad-v' },
+										{ label: 'Ipad (horizontal)', value: 'ipad-h' },
+								] }
+								onChange={ ( device ) => setDevice( device ) }
+								__nextHasNoMarginBottom
+						/>
 							<MediaUploadCheck fallback={ instructions }>
 								<MediaUpload
-									title={ __( 'Background image', 'image-selector-example' ) }
+									title={ __( 'Screen image', 'device-frame' ) }
 									onSelect={ onUpdateImage }
 									allowedTypes={ ALLOWED_MEDIA_TYPES }
-									value={ bgImageId }
+									value={ imageId }
 									render={ ( { open } ) => (
 										<Button
-											className={ ! bgImageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }
+											className={ ! imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview' }
 											onClick={ open }>
-											{ ! bgImageId && ( __( 'Set background image', 'image-selector-example' ) ) }
-											{ !! bgImageId && ! bgImage && <Spinner /> }
-											{ !! bgImageId && bgImage &&
+											{ ! imageId && ( __( 'Set screen image', 'device-frame' ) ) }
+											{ !! imageId && ! bgImage && <Spinner /> }
+											{ !! imageId && bgImage &&
 												<ResponsiveWrapper
 													naturalWidth={ bgImage.media_details.width }
 													naturalHeight={ bgImage.media_details.height }
 												>
-													<img src={ bgImage.source_url } alt={ __( 'Background image', 'image-selector-example' ) } />
+													<img src={ bgImage.source_url } alt={ __( 'Screen image', 'device-frame' ) } />
 												</ResponsiveWrapper>
 											}
 										</Button>
 									) }
 								/>
 							</MediaUploadCheck>
-							{ !! bgImageId && bgImage &&
+							{ !! imageId && bgImage &&
 								<MediaUploadCheck>
 									<MediaUpload
-										title={ __( 'Background image', 'image-selector-example' ) }
+										title={ __( 'Screen image', 'device-frame' ) }
 										onSelect={ onUpdateImage }
 										allowedTypes={ ALLOWED_MEDIA_TYPES }
-										value={ bgImageId }
+										value={ imageId }
 										render={ ( { open } ) => (
 											<Button onClick={ open } isDefault isLarge>
-												{ __( 'Replace background image', 'image-selector-example' ) }
+												{ __( 'Replace screen image', 'device-frame' ) }
 											</Button>
 										) }
 									/>
 								</MediaUploadCheck>
 							}
-							{ !! bgImageId &&
+							{ !! imageId &&
 								<MediaUploadCheck>
 									<Button onClick={ onRemoveImage } isLink isDestructive>
-										{ __( 'Remove background image', 'image-selector-example' ) }
+										{ __( 'Remove screen image', 'device-frame' ) }
 									</Button>
 								</MediaUploadCheck>
 							}
 						</div>
 					</PanelBody>
 				</InspectorControls>
-				<div
-					className={ className }
-					style={ styles }
-				>
-					<InnerBlocks />
+				
+				{ bgImage && bgImage.source_url &&
+				<div className="wp-block-device-frame ">
+					<div className = {device + " frame"}>
+						<div class="mask">
+							<img src={bgImage.source_url} alt="" class="screenshot" />
+						</div>
+					</div>
 				</div>
+				}
 			</Fragment>
 		);
 	}
@@ -100,10 +123,10 @@ class ImageSelectorEdit extends Component {
 export default compose(
 	withSelect( ( select, props ) => {
 		const { getMedia } = select( 'core' );
-		const { bgImageId } = props.attributes;
+		const { imageId } = props.attributes;
 
 		return {
-			bgImage: bgImageId ? getMedia( bgImageId ) : null,
+			bgImage: imageId ? getMedia( imageId ) : null,
 		};
 	} ),
 )( ImageSelectorEdit );

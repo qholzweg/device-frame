@@ -8,11 +8,15 @@
   "icon": "smartphone",
   "description": "A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.",
   "attributes": {
-    "bgImageId": {
+    "imageId": {
       "type": "number"
     },
-    "frameType": {
+    "imageUrl": {
       "type": "string"
+    },
+    "device": {
+      "type": "string",
+      "default": "iphone"
     }
   },
   "supports": {

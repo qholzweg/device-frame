@@ -38,57 +38,78 @@ class ImageSelectorEdit extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.
       className
     } = this.props;
     const {
-      bgImageId
+      imageId,
+      device
     } = attributes;
-    const instructions = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('To edit the background image, you need permission to upload media.', 'image-selector-example'));
-    let styles = {};
+    const instructions = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('To edit the image, you need permission to upload media.', 'device-frame'));
     if (bgImage && bgImage.source_url) {
-      styles = {
-        backgroundImage: `url(${bgImage.source_url})`
-      };
+      setAttributes({
+        imageUrl: bgImage.source_url
+      });
     }
     const onUpdateImage = image => {
       setAttributes({
-        bgImageId: image.id
+        imageId: image.id
       });
     };
     const onRemoveImage = () => {
       setAttributes({
-        bgImageId: undefined
+        imageId: undefined,
+        imageUrl: undefined
+      });
+    };
+    const setDevice = device => {
+      setAttributes({
+        device: device
       });
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Background settings', 'image-selector-example'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Device frame settings', 'device-frame'),
       initialOpen: true
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "wp-block-image-selector-example-image"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, {
+      className: "wp-block-device-frame-settings"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
+      label: "Select device type",
+      value: device,
+      options: [{
+        label: 'Iphone',
+        value: 'iphone'
+      }, {
+        label: 'Ipad (vertical)',
+        value: 'ipad-v'
+      }, {
+        label: 'Ipad (horizontal)',
+        value: 'ipad-h'
+      }],
+      onChange: device => setDevice(device),
+      __nextHasNoMarginBottom: true
+    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, {
       fallback: instructions
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Background image', 'image-selector-example'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Screen image', 'device-frame'),
       onSelect: onUpdateImage,
       allowedTypes: ALLOWED_MEDIA_TYPES,
-      value: bgImageId,
+      value: imageId,
       render: _ref => {
         let {
           open
         } = _ref;
         return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-          className: !bgImageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview',
+          className: !imageId ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview',
           onClick: open
-        }, !bgImageId && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Set background image', 'image-selector-example'), !!bgImageId && !bgImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null), !!bgImageId && bgImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ResponsiveWrapper, {
+        }, !imageId && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Set screen image', 'device-frame'), !!imageId && !bgImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Spinner, null), !!imageId && bgImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ResponsiveWrapper, {
           naturalWidth: bgImage.media_details.width,
           naturalHeight: bgImage.media_details.height
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
           src: bgImage.source_url,
-          alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Background image', 'image-selector-example')
+          alt: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Screen image', 'device-frame')
         })));
       }
-    })), !!bgImageId && bgImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Background image', 'image-selector-example'),
+    })), !!imageId && bgImage && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Screen image', 'device-frame'),
       onSelect: onUpdateImage,
       allowedTypes: ALLOWED_MEDIA_TYPES,
-      value: bgImageId,
+      value: imageId,
       render: _ref2 => {
         let {
           open
@@ -97,16 +118,23 @@ class ImageSelectorEdit extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.
           onClick: open,
           isDefault: true,
           isLarge: true
-        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Replace background image', 'image-selector-example'));
+        }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Replace screen image', 'device-frame'));
       }
-    })), !!bgImageId && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    })), !!imageId && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.MediaUploadCheck, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       onClick: onRemoveImage,
       isLink: true,
       isDestructive: true
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Remove background image', 'image-selector-example')))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: className,
-      style: styles
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, null)));
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Remove screen image', 'device-frame')))))), bgImage && bgImage.source_url && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "wp-block-device-frame "
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: device + " frame"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      class: "mask"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      src: bgImage.source_url,
+      alt: "",
+      class: "screenshot"
+    })))));
   }
 }
 /* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_3__.compose)((0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.withSelect)((select, props) => {
@@ -114,10 +142,10 @@ class ImageSelectorEdit extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.
     getMedia
   } = select('core');
   const {
-    bgImageId
+    imageId
   } = props.attributes;
   return {
-    bgImage: bgImageId ? getMedia(bgImageId) : null
+    bgImage: imageId ? getMedia(imageId) : null
   };
 }))(ImageSelectorEdit));
 
@@ -137,21 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/block.json");
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
- */
 
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor. All other files
- * get applied to the editor only.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
 
 
 
@@ -161,12 +175,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
- */
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -195,7 +203,21 @@ function save(_ref) {
     attributes
   } = _ref;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
+  const {
+    imageUrl,
+    device
+  } = attributes;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, imageUrl && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "wp-block-device-frame "
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: device + " frame"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "mask"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    src: imageUrl,
+    alt: "",
+    class: "screenshot"
+  })))));
 }
 
 /***/ }),
@@ -300,7 +322,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/device-frame","version":"0.1.0","title":"Device frame","category":"common","icon":"smartphone","description":"A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.","attributes":{"bgImageId":{"type":"number"},"frameType":{"type":"string"}},"supports":{"html":false,"align":["full"]},"textdomain":"device-frame","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/device-frame","version":"0.1.0","title":"Device frame","category":"common","icon":"smartphone","description":"A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.","attributes":{"imageId":{"type":"number"},"imageUrl":{"type":"string"},"device":{"type":"string","default":"iphone"}},"supports":{"html":false,"align":["full"]},"textdomain":"device-frame","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

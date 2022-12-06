@@ -13,7 +13,7 @@
 	background-size: cover;
 }
 
-.wp-block-image-selector-example-image {
+.wp-block-device-frame-settings {
 	.components-spinner {
 			margin: 0;
 			float: none;
@@ -23,5 +23,62 @@
 	.components-button + .components-button {
 			margin-top: 1em;
 			margin-right: 8px;
+	}
+	
+}
+.wp-block-device-frame {
+	.frame {
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		mask-type: alpha;
+		background: center center no-repeat;
+		background-size: contain;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 200px;
+	}
+	.frame .mask {
+		-webkit-mask-size:100%;
+		mask-size: 100%;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+	}
+	.frame img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	.iphone {
+		background-image: url(../assets/img/iphone14.png);
+		max-width: 400px;
+		aspect-ratio: 0.496 / 1;
+	}
+	.iphone .mask {
+		-webkit-mask-image: url(../assets/img/iphone14-m.png);
+		mask-image: url(../assets/img/iphone14-m.png);
+		margin: 6%;
+		margin-top: 7.6%;
+	}
+	
+	.ipad-v {
+		background-image: url(../assets/img/tab-frame-v.png);
+		max-width: 588px;
+	}
+	.ipad-v .mask {
+		-webkit-mask-image: url(../assets/img/ipad-mask-v.png);
+		mask-image: url(../assets/img/ipad-mask-v.png);
+		margin: 7% 6% 6%;
+	}
+	
+	.ipad-h .mask {
+		-webkit-mask-image: url(../assets/img/ipad-mask-h.png);
+		mask-image: url(../assets/img/ipad-mask-h.png);
+		margin: 7% 4% 4%;
+	}
+	.ipad-h {
+		max-width: 812px;
+		background-image: url(../assets/img/tab-frame.png);
 	}
 }

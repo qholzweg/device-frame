@@ -13,13 +13,65 @@
   background-size: cover;
 }
 
-.wp-block-image-selector-example-image .components-spinner {
+.wp-block-device-frame-settings .components-spinner {
   margin: 0;
   float: none;
 }
-.wp-block-image-selector-example-image .components-button + .components-button {
+.wp-block-device-frame-settings .components-button + .components-button {
   margin-top: 1em;
   margin-right: 8px;
+}
+
+.wp-block-device-frame .frame {
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-type: alpha;
+  background: center center no-repeat;
+  background-size: contain;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+}
+.wp-block-device-frame .frame .mask {
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.wp-block-device-frame .frame img {
+  max-width: 100%;
+  height: auto;
+}
+.wp-block-device-frame .iphone {
+  background-image: url(images/iphone14.cc883e42.png);
+  max-width: 400px;
+  aspect-ratio: 0.496/1;
+}
+.wp-block-device-frame .iphone .mask {
+  -webkit-mask-image: url(images/iphone14-m.a93a8d66.png);
+  mask-image: url(images/iphone14-m.a93a8d66.png);
+  margin: 6%;
+  margin-top: 7.6%;
+}
+.wp-block-device-frame .ipad-v {
+  background-image: url(images/tab-frame-v.ebec8a09.png);
+  max-width: 588px;
+}
+.wp-block-device-frame .ipad-v .mask {
+  -webkit-mask-image: url(images/ipad-mask-v.37c37091.png);
+  mask-image: url(images/ipad-mask-v.37c37091.png);
+  margin: 7% 6% 6%;
+}
+.wp-block-device-frame .ipad-h .mask {
+  -webkit-mask-image: url(images/ipad-mask-h.e6f937c0.png);
+  mask-image: url(images/ipad-mask-h.e6f937c0.png);
+  margin: 7% 4% 4%;
+}
+.wp-block-device-frame .ipad-h {
+  max-width: 812px;
+  background-image: url(images/tab-frame.a0d48974.png);
 }
 
 /*# sourceMappingURL=style-index.css.map*/
