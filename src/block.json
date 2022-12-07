@@ -6,13 +6,10 @@
 	"title": "Device frame",
 	"category": "common",
 	"icon": "smartphone",
-	"description": "A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.",
+	"description": "Frames your image with a mobile device screen",
 	"attributes": {
-		"imageId": {
-			"type": "number"
-		},
-		"imageUrl": {
-			"type": "string"
+		"image": {
+			"type": "object"
 		},
 		"device": {
 			"type":"string",
