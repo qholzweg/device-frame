@@ -1,7 +1,7 @@
 Блок для редактора Wordpress, позволяющий поставить внутреннее изображение на экран телефона, планшета или ноутбука
 Стек: React, js, html, css
 
-![Stellar burger](http://holzweg.ru/tmp/constructor.png)
+![Stellar burger](https://github.com/qholzweg/device-frame/blob/master/2023-04-20_18-00-04.png)
 
 ## Основной функционал:
 - Выбрать или загрузить скриншот для отображения
